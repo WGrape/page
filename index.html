@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人黄页</title>
+    <title>个人主页</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.0/animate.min.css" rel="stylesheet">
     <style>
@@ -417,7 +417,7 @@
 <body data-spy="scroll" data-target="#myScrollspy">
 <div id="Head">
     <ul style="margin-top: 10px;">
-        <li class="logo"><h2>个人黄页</h2>
+        <li class="logo"><h2>个人主页</h2>
         </li>
         <li class="search">
             <select>
@@ -432,9 +432,9 @@
 </div>
 <div id="Scarf">
     <p id="Welcome" style="width: 1044px;font-size:13px;margin:0 auto;">
-        <a target="_blank" href="">技术黄页</a>
+        <a target="_blank" href="">技术主页</a>
         <span> > </span>
-        <span style="color:#555;">欢迎访问您的个人黄页</span>
+        <span style="color:#555;">欢迎访问您的个人主页</span>
         <span id="Menu" class="animate__animated animate__heartBeat"><i class="fa fa-bars" aria-hidden="true"></i><span
                 style="padding-left:7px">菜单</span></span>
     </p>
@@ -462,7 +462,7 @@
 <div id="Foot"
      style="background: #eee;height: 70px;line-height: 70px;text-align: center;font-size:12px;color:#888;border-top:1px solid #ddd;">
     <div>
-        <p><span>个人黄页©2020-2020</span>
+        <p><span>个人主页©2020-2020</span>
             <span style="margin-left: 10px;"><a href="https://github.com/WGrape/page">查看源码</a></span>
             <span style="margin-left: 5px;"><a href="" target="_blank">使用帮助</a></span>
         </p>
@@ -585,7 +585,7 @@
     $("#Dialog-adjust .control .sure").click(function () {
         let str = $("#AdjustJson").text();
         str = JSON.stringify(JSON.parse(str));
-        localStorage.setItem('yellow_page_config', str);
+        localStorage.setItem('main_page_config', str);
         $("#Layer").addClass('hide');
         $("#Dialog-adjust").addClass('hide');
         window.location.reload();
@@ -610,13 +610,13 @@
     $("#Tie button.delete").click(function () {
         let res = confirm('所有内容会丢失，你确定要清除吗？');
         if (res) {
-            localStorage.removeItem('yellow_page_config');
+            localStorage.removeItem('main_page_config');
             alert('清除成功');
             window.location.reload();
         }
     });
     $("#Tie button.download").click(function () {
-        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('yellow_page_config')), null, 2);
+        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('main_page_config')), null, 2);
         if ('null' === str || null === str || undefined === str || undefined === typeof str) {
             str = '{}';
         }
@@ -626,7 +626,7 @@
         $("#Dialog-alert .form").append('<pre id="DownloadJson">' + str + '</pre>');
     });
     $("#Tie button.adjust").click(function () {
-        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('yellow_page_config')), null, 2);
+        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('main_page_config')), null, 2);
         if ('null' === str || null === str || undefined === str || undefined === typeof str) {
             str = '{}';
         }
@@ -658,7 +658,7 @@
             };
             custom.push(obj);
         });
-        localStorage.setItem('yellow_page_config', JSON.stringify({'custom': custom}));
+        localStorage.setItem('main_page_config', JSON.stringify({'custom': custom}));
         alert('保存成功');
         window.location.reload();
     }
@@ -681,7 +681,7 @@
 
 
     function loadCustom() {
-        let config = localStorage.getItem('yellow_page_config');
+        let config = localStorage.getItem('main_page_config');
         config = JSON.parse(config);
         if ('undefined' === typeof config || null === config) {
             return;
