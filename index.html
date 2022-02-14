@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人黄页</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.0/animate.min.css" rel="stylesheet">
+    <style>
+
+        html {
+            min-width: 1420px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style: none;
+            vertical-align: middle;
+        }
+
+        ul li {
+            display: inline-block;
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .logo img {
+            width: 70px;
+        }
+
+        .search select {
+            height: 37px;
+            border: 1px solid #c2c2c2;
+            border-radius: 5px;
+            padding: 0 5px;
+            outline: none;
+            background: #eee;
+            color: #555;
+            margin-right: -7px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            text-align: center;
+            width: 75px;
+            font-size: 14px;
+            border-right: 5px solid transparent;
+            cursor: pointer;
+            -moz-appearance: none;
+        }
+
+        .search input {
+            border: 1px solid #ddd;
+            padding: 10px 7px;
+            outline: none;
+            border-right: none;
+            width: 400px;
+            height: 15px;
+        }
+
+        .search button {
+            width: 100px;
+            height: 37px;
+            font-size: 14px;
+            color: white;
+            letter-spacing: 1px;
+            background: #3385ff;
+            border: none;
+            padding: 0;
+            border-bottom: 1px solid #2d78f4;
+            outline: medium;
+            opacity: 0.9;
+            margin-left: -5px;
+        }
+
+        .search button:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        #Head {
+            text-align: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+            height: 60px;
+            vertical-align: middle;
+        }
+
+        #Scarf {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: #f8f8f8;
+            vertical-align: middle;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #Tie {
+            padding: 0;
+        }
+
+        #Tie .add, #Tie .download, #Tie .save, #Tie .delete, #Tie .adjust, #Tie .help {
+            border: none;
+            line-height: 40px;
+            cursor: pointer;
+            color: #555;
+            margin-right: 20px;
+            background: none;
+            outline: none;
+            font-size: 13px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #Tie .add:hover, #Tie .download:hover, #Tie .save:hover, #Tie .delete:hover, #Tie .adjust:hover, #Tie .help:hover {
+            background: #eee;
+        }
+
+        #Menu {
+            cursor: pointer;
+            margin-left: 723px;
+            display: inline-block;
+        }
+
+        #MenuList {
+            margin-top: -7px;
+            width: 150px;
+            float: right;
+            border: 1px solid #ddd;
+            margin-right: 40px;
+            background: #FFF;
+            position: absolute;
+            z-index: 2;
+            border-radius: 5px;
+            margin-left: 863px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        #Body {
+            padding: 0 0 20px 0;
+            min-height: 500px;
+        }
+
+        .block-container {
+            width: 925px;
+            padding: 20px 0;
+            min-height: 100px;
+            margin: 0 auto;
+        }
+
+        .block {
+            width: 1028px;
+            margin: 20px 0;
+            min-height: 100px;
+            margin-bottom: 0;
+        }
+
+        .mock-block {
+            min-height: 100px;
+            /*border: 1px dashed #ddd;*/
+        }
+
+        .block .title input {
+            padding-bottom: 5px;
+            border: none;
+            border-bottom: 1px solid #ebebeb;
+            outline: none;
+            width: 915px;
+            font-size: 18px;
+        }
+
+        .block .links input {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .block .links {
+            margin-top: 20px;
+            word-break: keep-all;
+        }
+
+        .block .links .link {
+            min-width: 200px;
+            display: inline-block;
+            margin-right: 25px;
+            margin-bottom: 25px;
+        }
+
+        .block .links .link a {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .block .links .link a:hover {
+            color: #014cd2;
+            text-decoration: underline;
+        }
+
+        .block .links .close {
+            margin-left: 15px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .block .links .close:hover {
+            color: red
+        }
+
+        .block .widget {
+            text-align: left;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .block .widget .add, .block .widget .edit {
+            color: #555;
+            background: #eee;
+            font-size: 13px;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            opacity: 0.9;
+        }
+
+        .block .widget .add:hover, .block .widget .edit:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .block .widget .edit.edit_true {
+            background: #f44336;
+            color: #FFF;
+        }
+
+        .block .links .link:hover .close {
+        }
+
+        #Dialog, #Dialog-alert, #Dialog-adjust {
+            text-align: center;
+            position: fixed;
+            top: 25%;
+            left: 35%;
+            width: 400px;
+            height: 280px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        #Dialog-adjust {
+            height: auto;
+            margin-bottom: 25%;
+        }
+
+        #AdjustJson {
+            outline: none;
+            text-align: left;
+            overflow: scroll;
+        }
+
+        #Dialog-adjust {
+            position: absolute;
+        }
+
+        #Dialog-alert .form {
+            height: 140px;
+            overflow-y: scroll;
+            text-align: left;
+        }
+
+        #Dialog-alert .form pre {
+            height: inherit;
+        }
+
+        #Dialog button, #Dialog-alert button, #Dialog-adjust button {
+            display: inline-block;
+            padding: 5px 10px;
+            border: none;
+            height: 40px;
+            width: 90px;
+            color: #FFF;
+            border-radius: 3px;
+            opacity: 0.9;
+        }
+
+        #Dialog button.cancel, #Dialog-adjust button.cancel {
+            background: darkred;
+            margin-right: 10px;
+        }
+
+        #Dialog button.sure, #Dialog-alert button.sure, #Dialog-adjust button.sure {
+            background: #0d68a9;
+        }
+
+        #Dialog button.cancel:hover, #Dialog button.sure:hover, #Dialog-alert button.sure:hover, #Dialog-adjust button.cancel:hover, #Dialog-adjust button.sure:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        #Layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #222;
+            opacity: 0.8;
+            z-index: 5;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        h3 {
+            font-weight: lighter;
+        }
+
+
+        #myScrollspy {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            position: fixed;
+            top: 140px;
+            max-height: 600px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            z-index: 2;
+            background: #FFF;
+        }
+
+        ul.nav-tabs {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        }
+
+        ul.nav-tabs li {
+            display: block;
+            margin: 0;
+            border-top: 1px solid #ddd;
+            width: 170px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        ul.nav-tabs li:first-child {
+            border-top: none;
+        }
+
+        ul.nav-tabs li a {
+            margin: 0;
+            border-radius: 0;
+            display: inline-block;
+            width: inherit;
+            height: inherit;
+            font-size: 12px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #555;
+        }
+
+        ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover {
+            color: #fff;
+            background: #0088cc;
+            border: 1px solid #0088cc;
+        }
+
+        ul.nav-tabs li:first-child a {
+            border-radius: 4px 4px 0 0;
+        }
+
+        ul.nav-tabs li:last-child a {
+            border-radius: 0 0 4px 4px;
+        }
+
+        ul.nav-tabs.affix {
+            top: 30px; /* Set the top position of pinned element */
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            scrollbar-width: 7px;
+            scrollbar-color: #ddd #FFF;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: #FFF;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: #ddd;
+        }
+
+    </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+<div id="Head">
+    <ul style="margin-top: 10px;">
+        <li class="logo"><h2>个人黄页</h2>
+        </li>
+        <li class="search">
+            <select>
+                <option value="0">百度</option>
+                <option value="1">Google</option>
+                <option value="2">Bing <i class="fa fa-sort-desc" aria-hidden="true"></i></option>
+            </select>
+            <input placeholder=""/>
+            <button>搜索</button>
+        </li>
+    </ul>
+</div>
+<div id="Scarf">
+    <p id="Welcome" style="width: 1044px;font-size:13px;margin:0 auto;">
+        <a target="_blank" href="">技术黄页</a>
+        <span> > </span>
+        <span style="color:#555;">欢迎访问您的个人黄页</span>
+        <span id="Menu" class="animate__animated animate__heartBeat"><i class="fa fa-bars" aria-hidden="true"></i><span
+                style="padding-left:7px">菜单</span></span>
+    </p>
+</div>
+<div id="Tie" style="padding-left: 200px;padding-right: 200px;">
+    <div class="tie-main" style="text-align: right;width: 1025px;font-size: 13px;margin: 0 auto;">
+        <div id="MenuList" class="hide">
+            <button class="add"><i class="fa fa-plus" aria-hidden="true"></i> <span>类别</span></button>
+            <button class="save"><i class="fa fa-clipboard" aria-hidden="true"></i> <span>保存</span></button>
+            <button class="adjust"><i class="fa fa-plug" aria-hidden="true"></i> <span>调整</span></button>
+            <button class="download"><i class="fa fa-download" aria-hidden="true"></i> <span>导出</span></button>
+            <button class="delete"><i class="fa fa-trash" aria-hidden="true"></i> <span>清除</span></button>
+            <a href="" target="_blank">
+                <button class="help"><i class="fa fa-question" aria-hidden="true"></i> <span>帮助</span></button>
+            </a>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+<div id="Body">
+    <ul class="block-container">
+
+    </ul>
+</div>
+<div id="Foot"
+     style="background: #eee;height: 70px;line-height: 70px;text-align: center;font-size:12px;color:#888;border-top:1px solid #ddd;">
+    <div>
+        <p><span>个人黄页©2020-2020</span><span style="margin-left: 10px;"><a
+                href="" target="_blank">使用帮助</a></span></p>
+    </div>
+</div>
+<div id="Layer" class="hide"></div>
+<div id="Dialog" class="hide">
+    <div class="title" style="padding:10px;border-bottom: 1px solid #ddd;margin-bottom: 20px;">
+        <span>添加链接</span>
+        <span class="close" style="float:right;cursor: pointer;"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </div>
+    <div class="form">
+        <p><input class="input-link-name"
+                  style="width:275px;height:30px;line-height:30px;padding:3px 10px;border:1px solid #ddd;border-radius:5px;outline:none;"
+                  placeholder="输入链接名"/></p>
+        <p style="margin-top:10px;"><input class="input-link-address"
+                                           style="width:275px;height:30px;line-height:30px;padding:3px 10px;border:1px solid #ddd;border-radius:5px;outline:none;"
+                                           placeholder="输入链接地址"/></p>
+    </div>
+    <div class="control" style="text-align:center;margin-top:20px;">
+        <button class="cancel">取消</button>
+        <button class="sure">确认</button>
+    </div>
+</div>
+<div id="Dialog-alert" class="hide">
+    <div class="title" style="padding:10px;border-bottom: 1px solid #ddd;margin-bottom: 20px;">
+        <span>下载配置</span>
+        <span class="close" style="float:right;cursor: pointer;"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </div>
+    <div class="form"></div>
+    <div class="control" style="text-align:center;margin-top:20px;">
+        <button class="sure" id="ButtonCopyLink" data-clipboard-target="#DownloadJson">复制</button>
+    </div>
+</div>
+<div id="Dialog-adjust" class="hide">
+    <div class="title" style="padding:10px;border-bottom: 1px solid #ddd;">
+        <span>调整配置</span>
+        <span class="close" style="float:right;cursor: pointer;"><i class="fa fa-times" aria-hidden="true"></i></span>
+    </div>
+    <div style="text-align: left;padding: 10px 0;font-size: 13px;color: #666;">请在如下光标区域输入</div>
+    <div class="form"></div>
+    <div class="control" style="text-align:center;margin-top:20px;margin-bottom: 20px;">
+        <button class="cancel">取消</button>
+        <button class="sure">确认</button>
+    </div>
+</div>
+<div id="myScrollspy" class="hide">
+    <div style="padding: 10px;font-size: 15px;font-weight: bold;text-align: center;background: #eee;">导航列表</div>
+    <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="1"></ul>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/blueimp-md5/2.17.0/js/md5.js"></script>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.4/clipboard.js"></script>
+<script>
+
+    new ClipboardJS('#ButtonCopyLink');
+    $("#Dialog-alert .control .sure").click(function () {
+        // alert('复制成功');
+    });
+
+    let clock = null;
+    $('#Menu, #MenuList, #MenuList button').mouseover(function () {
+        if (null !== clock) {
+            clearTimeout(clock);
+        }
+        $("#MenuList").removeClass('hide');
+    });
+    $('#Menu, #MenuList').mouseout(function () {
+        clock = setTimeout(function () {
+            $("#MenuList").addClass('hide');
+        }, 100);
+    });
+
+    $('.search select').mouseover(function () {
+        $('.search select').click();
+    });
+
+    $("#Dialog .close").click(function () {
+        $("#Layer").addClass('hide');
+        $("#Dialog").addClass('hide');
+    });
+    $("#Dialog-alert .close").click(function () {
+        $("#Layer").addClass('hide');
+        $("#Dialog-alert").addClass('hide');
+    });
+    $("#Dialog-adjust .close").click(function () {
+        $("#Layer").addClass('hide');
+        $("#Dialog-adjust").addClass('hide');
+    });
+    $("#Dialog .control .cancel").click(function () {
+        $("#Layer").addClass('hide');
+        $("#Dialog").addClass('hide');
+    });
+    $("#Dialog-adjust .control .cancel").click(function () {
+        $("#Layer").addClass('hide');
+        $("#Dialog-adjust").addClass('hide');
+    });
+    $(document).on('click', '#Body .block-container .block .widget .add', function () {
+        $("#Layer").removeClass('hide');
+        $("#Dialog").removeClass('hide');
+
+        let blockId = $(this).parent().parent().parent().attr('data-block-id');
+        $("#Dialog .control .sure").attr('data-block-id', blockId);
+    });
+    $(document).on('click', '.block .links .close', function () {
+        $(this).parent().remove();
+    });
+    $("#Dialog .control .sure").click(function () {
+        let name = $(".input-link-name").val();
+        let link = $(".input-link-address").val();
+        $(".input-link-name").val('');
+        $(".input-link-address").val('');
+        let html = '<span class="link"><a target="_blank" href="' + link + '">' + name + '</a><span class="close hide"><i class="fa fa-times" aria-hidden="true"></i></span></span>';
+        let blockId = $(this).attr('data-block-id');
+        $("#Block-" + blockId + ' .links').prepend(html);
+        $("#Layer").addClass('hide');
+        $("#Dialog").addClass('hide');
+    });
+
+    $("#Dialog-adjust .control .sure").click(function () {
+        let str = $("#AdjustJson").text();
+        str = JSON.stringify(JSON.parse(str));
+        localStorage.setItem('yellow_page_config', str);
+        $("#Layer").addClass('hide');
+        $("#Dialog-adjust").addClass('hide');
+        window.location.reload();
+    });
+
+    /*{ custom : [
+         {
+             blockId:'xxxxx',
+             links:[
+                 {'name':'', 'href':''}
+             ]
+         }
+      ]
+    }*/
+    $("#Tie .tie-main .add").click(function () {
+
+        let hash = md5(new Date().getTime() + Math.floor(Math.random() * 100000000));
+        console.log(hash);
+        let html = '<li class="block" data-block-id="' + hash + '" id="Block-' + hash + '"><div class="title"><input value="" placeholder="请输入类别标题"/><span class="widget"><span class="add"><i class="fa fa-plus" aria-hidden="true"></i></span> <span class="edit"><i class="fa fa-paint-brush" aria-hidden="true"></i></span> </span></div><div class="links"></div></li>';
+        $("#Body .block-container").prepend(html);
+    });
+    $("#Tie button.delete").click(function () {
+        let res = confirm('所有内容会丢失，你确定要清除吗？');
+        if (res) {
+            localStorage.removeItem('yellow_page_config');
+            alert('清除成功');
+            window.location.reload();
+        }
+    });
+    $("#Tie button.download").click(function () {
+        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('yellow_page_config')), null, 2);
+        if ('null' === str || null === str || undefined === str || undefined === typeof str) {
+            str = '{}';
+        }
+        $("#Layer").removeClass('hide');
+        $("#Dialog-alert").removeClass('hide');
+        $("#Dialog-alert .form").html('');
+        $("#Dialog-alert .form").append('<pre id="DownloadJson">' + str + '</pre>');
+    });
+    $("#Tie button.adjust").click(function () {
+        let str = JSON.stringify(JSON.parse(window.localStorage.getItem('yellow_page_config')), null, 2);
+        if ('null' === str || null === str || undefined === str || undefined === typeof str) {
+            str = '{}';
+        }
+        $("#Layer").removeClass('hide');
+        $("#Dialog-adjust").removeClass('hide');
+        $("#Dialog-adjust .form").html('');
+        $("#Dialog-adjust .form").append('<pre id="AdjustJson" contenteditable="true">' + str + '</pre>');
+        $('#AdjustJson').click();
+        $('#AdjustJson').focus();
+    });
+
+    function save() {
+        let custom = [];
+        $('#Body .block-container .block').each(function () {
+            let links = [];
+            let hash = $(this).attr('data-block-id');
+            let title = $('#Block-' + hash + ' .title input').val();
+            $('#Block-' + hash + ' .links .link').each(function () {
+                let a = $(this).find('a');
+                let href = a.attr('href');
+                let name = a.text();
+                let link = {'name': name, 'href': href};
+                links.push(link);
+            });
+            let obj = {
+                blockId: hash,
+                title: title,
+                links: links,
+            };
+            custom.push(obj);
+        });
+        localStorage.setItem('yellow_page_config', JSON.stringify({'custom': custom}));
+        alert('保存成功');
+        window.location.reload();
+    }
+
+    $("#Tie button.save").click(function () {
+        save();
+    });
+
+    $(document).keydown(function (event) {
+            // If Control or Command key is pressed and the S key is pressed
+            // run save function. 83 is the key code for S.
+            if ((event.ctrlKey || event.metaKey) && 83 == event.which) {
+                // Save Function
+                save();
+                event.preventDefault();
+                return false;
+            }
+        }
+    );
+
+
+    function loadCustom() {
+        let config = localStorage.getItem('yellow_page_config');
+        config = JSON.parse(config);
+        if ('undefined' === typeof config || null === config) {
+            return;
+        }
+        let i = 0;
+        let custom = config['custom'];
+        for (let item of custom) {
+
+            let hash = item.blockId;
+            let html = '<li class="block" data-block-id="' + hash + '" id="Block-' + hash + '"><div class="title"><input value="' + item.title + '" placeholder="请输入类别标题"/><span class="widget"><span class="add"><i class="fa fa-plus" aria-hidden="true"></i></span> <span class="edit"><i class="fa fa-paint-brush" aria-hidden="true"></i></span> </span></div><div class="links"></div></li>';
+            $("#Body .block-container").append(html);
+            for (let link of item['links']) {
+
+                let html = '<span class="link"><a target="_blank" href="' + link['href'] + '">' + link['name'] + '</a><span class="close hide"><i class="fa fa-times" aria-hidden="true"></i></span></span>';
+                $("#Block-" + hash + ' .links').append(html);
+            }
+            ++i;
+            // <li><a href="#Block-b18c1029f2edd9858a877cba2d0e84fe">第二部分</a></li>
+            $('#myScrollspy ul.nav').append('<li><a href="#Block-' + hash + '">' + item.title + '</a></li>');
+        }
+
+        let distance = $('#Welcome').css('margin-left');
+        distance = distance.split('px');
+        if (distance.length > 0) {
+            distance = parseInt(distance[0]);
+        }
+        if(i > 15){
+            $('#myScrollspy').removeClass('hide');
+            $('#myScrollspy').css('left', distance - 174);
+        }else{
+            $('#Body .block-container').css('margin-left', distance);
+            $('.block .title input').css('width', 970);
+            $('.block').css('width', 1110);
+            $('.block-container').css('width', 1125);
+        }
+    }
+
+    function search() {
+        let map = [
+            'https://www.baidu.com/s?wd=',
+            'https://www.google.com/search?q=',
+            'https://cn.bing.com/search?q=',
+        ];
+        let op = parseInt($('.search select').val());
+        if (op < 0 || op > 2) {
+            return;
+        }
+        window.open(map[op] + $('.search input').val());
+    }
+
+    $(document).on('click', '.block .widget .edit', function () {
+
+        let edit = parseInt($(this).attr('data-edit-true'));
+        if (1 !== edit && 0 !== edit) {
+            edit = 1;
+        } else {
+            edit ^= 1;
+        }
+        $(this).attr('data-edit-true', edit);
+
+        let blockId = $(this).parent().parent().parent().attr('data-block-id');
+        if (edit) {
+            $(this).addClass('edit_true');
+            $('#Block-' + blockId + ' .links .link .close').removeClass('hide');
+            $(this).parent().parent().parent().find('.links .link').addClass('animate__shakeX');
+        } else {
+            $(this).removeClass('edit_true');
+            $('#Block-' + blockId + ' .links .link .close').addClass('hide');
+            $(this).parent().parent().parent().find('.links .link').removeClass('animate__shakeX');
+        }
+    });
+
+    $('.search button').click(function () {
+        search();
+    });
+
+    $('.search input').keypress(function (even) {
+        if (13 === even.which) {
+            search();
+        }
+    });
+
+    window.onload = function () {
+        loadCustom();
+    }
+
+</script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
