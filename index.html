@@ -98,6 +98,52 @@
             border-bottom: 1px solid #ddd;
         }
 
+        #OKR {
+            margin-top: 20px;
+        }
+
+        #OKRList {
+            text-align: center;
+        }
+
+        #OKRList li {
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .okr_item {
+            display: inline-block;
+            width: 300px;
+            height: 220px;
+            border: 1px solid #ddd;
+            background: #eee;
+            border-radius: 5px;
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        .okr_item .okr-input-o {
+            border: 1px solid #ddd;
+            padding: 3px;
+            width: 240px;
+            height: 20px;
+            background: #ddd;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .okr_item .okr-input-kr {
+            border: 1px solid #ddd;
+            padding: 3px;
+            width: 270px;
+            height: 20px;
+            background: #ddd;
+            text-align: left;
+            line-height: 20px;
+            margin-top: 10px;
+            float: left;
+        }
+
         #Tie {
             padding: 0;
         }
@@ -455,6 +501,72 @@
     </div>
 </div>
 <div id="Body">
+
+    <div id="OKR">
+        <ul id="OKRList">
+            <li>
+                <div id="OKR1" class="okr_item">
+                    <div style="float: left;font-size: 13px;color: #d46515;padding:5px;font-weight: bold;">OKR1</div>
+                    <input class="okr-input-o" placeholder="输入你的Object"/>
+
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                </div>
+            </li>
+            <li>
+                <div id="OKR2" class="okr_item">
+                    <div style="float: left;font-size: 13px;color: #d46515;padding:5px;font-weight: bold;">OKR2</div>
+                    <input class="okr-input-o" placeholder="输入你的Object"/>
+
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                </div>
+            </li>
+            <li>
+                <div id="OKR3" class="okr_item">
+                    <div style="float: left;font-size: 13px;color: #d46515;padding:5px;font-weight: bold;">OKR3</div>
+                    <input class="okr-input-o" placeholder="输入你的Object"/>
+
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                </div>
+            </li>
+            <li>
+                <div id="OKR4" class="okr_item">
+                    <div style="float: left;font-size: 13px;color: #d46515;padding:5px;font-weight: bold;">OKR4</div>
+                    <input class="okr-input-o" placeholder="输入你的Object"/>
+
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                </div>
+            </li>
+            <li>
+                <div id="OKR5" class="okr_item">
+                    <div style="float: left;font-size: 13px;color: #d46515;padding:5px;font-weight: bold;">OKR5</div>
+                    <input class="okr-input-o" placeholder="输入你的Object"/>
+
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                    <input class="okr-input-kr" placeholder="输入你的KR"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <ul class="block-container">
 
     </ul>
@@ -640,6 +752,60 @@
 
     function save() {
         let custom = [];
+        let okr = [];
+
+        // OKR部分
+        let okrO1 = $('#Body #OKR #OKRList #OKR1 .okr-input-o').val();
+        let okrItem = {
+            "object": okrO1,
+            "kr": [],
+        };
+        $('#Body #OKR #OKRList #OKR1 .okr-input-kr').each(function () {
+            okrItem.kr.push($(this).val());
+        });
+        okr.push(okrItem);
+
+        let okrO2 = $('#Body #OKR #OKRList #OKR2 .okr-input-o').val();
+        okrItem = {
+            "object": okrO2,
+            "kr": [],
+        };
+        $('#Body #OKR #OKRList #OKR2 .okr-input-kr').each(function () {
+            okrItem.kr.push($(this).val());
+        });
+        okr.push(okrItem);
+
+        let okrO3 = $('#Body #OKR #OKRList #OKR3 .okr-input-o').val();
+        okrItem = {
+            "object": okrO3,
+            "kr": [],
+        };
+        $('#Body #OKR #OKRList #OKR3 .okr-input-kr').each(function () {
+            okrItem.kr.push($(this).val());
+        });
+        okr.push(okrItem);
+
+        let okrO4 = $('#Body #OKR #OKRList #OKR4 .okr-input-o').val();
+        okrItem = {
+            "object": okrO4,
+            "kr": [],
+        };
+        $('#Body #OKR #OKRList #OKR4 .okr-input-kr').each(function () {
+            okrItem.kr.push($(this).val());
+        });
+        okr.push(okrItem);
+
+        let okrO5 = $('#Body #OKR #OKRList #OKR5 .okr-input-o').val();
+        okrItem = {
+            "object": okrO5,
+            "kr": [],
+        };
+        $('#Body #OKR #OKRList #OKR5 .okr-input-kr').each(function () {
+            okrItem.kr.push($(this).val());
+        });
+        okr.push(okrItem);
+
+        // 链接部分
         $('#Body .block-container .block').each(function () {
             let links = [];
             let hash = $(this).attr('data-block-id');
@@ -658,7 +824,7 @@
             };
             custom.push(obj);
         });
-        localStorage.setItem('main_page_config', JSON.stringify({'custom': custom}));
+        localStorage.setItem('main_page_config', JSON.stringify({'custom': custom, 'okr': okr}));
         alert('保存成功');
         window.location.reload();
     }
@@ -708,14 +874,27 @@
         if (distance.length > 0) {
             distance = parseInt(distance[0]);
         }
-        if(i > 15){
+        if (i > 15) {
             $('#myScrollspy').removeClass('hide');
             $('#myScrollspy').css('left', distance - 174);
-        }else{
+        } else {
             $('#Body .block-container').css('margin-left', distance);
             $('.block .title input').css('width', 970);
             $('.block').css('width', 1110);
             $('.block-container').css('width', 1125);
+        }
+
+        let okrList = config['okr'];
+        for (let index in okrList) {
+            index = parseInt(index);
+            let okr = okrList[index]
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-o').val(okr.object);
+
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(0)').val(okr.kr[0])
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(1)').val(okr.kr[1])
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(2)').val(okr.kr[2])
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(3)').val(okr.kr[3])
+            $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(4)').val(okr.kr[4])
         }
     }
 
