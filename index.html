@@ -458,6 +458,65 @@
             background-color: #ddd;
         }
 
+        #Todolist {
+            margin: 30px auto;
+            width: 70%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px #ccc;
+        }
+
+        #Todolist #Newitem {
+            width: 87%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #Todolist #Additem {
+            padding: 10px;
+            border: none;
+            background-color: #008CBA;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #Todolist #Additem:hover {
+            background-color: #00698C;
+        }
+
+        #Todolist ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #Todolist li {
+            padding: 10px 30px 10px 10px;
+            margin: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+            max-width: 95%;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        #Todolist li:hover {
+            background-color: #ddd;
+        }
+
+        #Todolist li .delete_item {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body data-spy="scroll" data-target="#myScrollspy">
@@ -566,6 +625,15 @@
             </li>
         </ul>
     </div>
+
+    <div id="Todolist">
+        <div style="width: 90%;margin: 0 auto;">
+            <input type="text" id="Newitem">
+            <button id="Additem">todo</button>
+        </div>
+        <ul id="Items"></ul>
+    </div>
+
 
     <ul class="block-container">
 
@@ -753,6 +821,7 @@
     function save() {
         let custom = [];
         let okr = [];
+        let todoList = [];
 
         // OKR部分
         let okrO1 = $('#Body #OKR #OKRList #OKR1 .okr-input-o').val();
@@ -824,7 +893,19 @@
             };
             custom.push(obj);
         });
-        localStorage.setItem('main_page_config', JSON.stringify({'custom': custom, 'okr': okr}));
+
+        // todolist部分
+        $('#Body #Todolist #Items li').each(function () {
+            let text = $(this).contents().filter(function() {
+                return this.nodeType === 3; // 只保留文本节点
+            }).first().text();
+            let obj = {
+                text: text,
+            };
+            todoList.push(obj);
+        });
+        localStorage.setItem('main_page_config', JSON.stringify({'custom': custom, 'okr': okr, 'todoList': todoList}));
+
         alert('保存成功');
         window.location.reload();
     }
@@ -896,6 +977,11 @@
             $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(3)').val(okr.kr[3])
             $('#Body #OKR #OKRList #OKR' + (index + 1) + ' .okr-input-kr:nth(4)').val(okr.kr[4])
         }
+
+        let todoList = config['todoList'].reverse();
+        for (let index in todoList){
+            $("#Todolist #Items").prepend('<li>' + todoList[index].text + '<span class="delete_item">X</span></li>')
+        }
     }
 
     function search() {
@@ -949,5 +1035,31 @@
 
 </script>
 <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function addItem() {
+            var todo = $('#Newitem').val();
+            if (todo != '') {
+                $('#Items').prepend('<li>' + todo + '<span class="delete_item">X</span></li>');
+                $('#Newitem').val('');
+            }
+        }
+
+        // Add Item
+        $('#Additem').click(function () {
+            addItem();
+        });
+        $(document).on('keydown', '#Newitem', function (e) {
+            if (e.keyCode === 13) {
+                addItem();
+            }
+        });
+
+        // Delete Item
+        $(document).on('click', '.delete_item', function () {
+            $(this).parent().remove();
+        });
+    });
+</script>
 </body>
 </html>
